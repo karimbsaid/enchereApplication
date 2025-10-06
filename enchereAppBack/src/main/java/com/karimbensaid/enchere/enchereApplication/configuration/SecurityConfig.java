@@ -1,6 +1,7 @@
 package com.karimbensaid.enchere.enchereApplication.configuration;
 
 import com.karimbensaid.enchere.enchereApplication.security.JwtAuthenticationFilter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,6 +22,9 @@ import java.util.Arrays;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+    @Value("${frontend_url}")
+    private String frontend_url;
+
 
     private final JwtAuthenticationFilter jwtAuthFilter;
 
@@ -47,7 +51,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("https://enchereapplication-hbf7y4gz6-karimbensaid606-gmailcoms-projects.vercel.app"));
+        configuration.setAllowedOrigins(Arrays.asList(frontend_url));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setAllowCredentials(true);

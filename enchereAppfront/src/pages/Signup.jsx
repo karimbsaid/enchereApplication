@@ -52,6 +52,7 @@ const Signup = () => {
         navigate("/");
       }
     } catch (err) {
+      console.log(err);
       setError(err.message || "Une erreur s'est produite");
     } finally {
       setIsLoading(false);
