@@ -4,7 +4,6 @@ const baseURL = import.meta.env.VITE_API_URL;
 
 const axiosInstance = axios.create({
   baseURL: baseURL,
-  timeout: 10000,
   headers: {
     "Content-Type": "application/json",
   },
@@ -18,6 +17,7 @@ axiosInstance.interceptors.request.use((req) => {
 axiosInstance.interceptors.response.use(
   (response) => response.data,
   (error) => {
+    console.log(error);
     if (error.code == "ERR_NETWORK") {
       Swal.fire("network error");
       return;
